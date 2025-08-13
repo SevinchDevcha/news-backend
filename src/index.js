@@ -16,7 +16,7 @@ app.use(cors({
 
 
 app.get("/",(req , res) => {
-	res.status(201).json({success:true,msg:"your are msg"})
+	res.status(201).json({success:true,msg:"Assalomu aleykum dada yaxshimisiz"})
 })
 
 main_router.forEach((value) => {

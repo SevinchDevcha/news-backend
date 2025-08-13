@@ -26,7 +26,8 @@ newsRouter.post(
 	authMiddleware,
 	NewsValidator.add(),
 	ExpressValidate,
-	NewsController.add)
+	NewsController.add
+)
 
 newsRouter.get(
 	"/getById/:id",
