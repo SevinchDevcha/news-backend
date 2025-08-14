@@ -9,6 +9,8 @@ const cors = require('cors')
 void ConnectDB()
 
 app.use(express.json())
+app.use(express.text())
+
 
 app.use(cors({
   origin: "*"
@@ -16,7 +18,7 @@ app.use(cors({
 
 
 app.get("/",(req , res) => {
-	res.status(201).json({success:true,msg:"Assalomu aleykum dada yaxshimisiz"})
+	res.status(201).json("Assalomu aleykum hammaga , bu Sevinchning rasmiy sayti")
 })
 
 main_router.forEach((value) => {
