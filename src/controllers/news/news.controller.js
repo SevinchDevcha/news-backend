@@ -1,6 +1,6 @@
 const { StatusCodes } = require('http-status-codes')
 const { newsModel } = require('../../models/news/news.model')
-const { SaveFileModel } = require('../../models/save-file.js/save-file.model')
+const { SaveFileModel } = require('../../models/save-file/save-file.model')
 const { HttpException } = require('../../utils/http-exception')
 const { UserModel } = require('../../models/user/user.model')
 
@@ -90,36 +90,36 @@ class NewsController {
 	}
 
 	static delete = async (req, res) => {
-		const { id } = req.params;
-		const { user_id } = req.user;
-	
-		const user = await UserModel.findById(user_id);
-		if (!user) throw new HttpException(404, "User not found!");
-	
-		let news;
-	
-		if (user.role === "admin") {
-			news = await newsModel.findById(id); // admin hamma newsni o‘chira oladi
+		const { id } = req.params
+		const { user_id } = req.user
+
+		const user = await UserModel.findById(user_id)
+		if (!user) throw new HttpException(404, 'User not found!')
+
+		let news
+
+		if (user.role === 'admin') {
+			news = await newsModel.findById(id) // admin hamma newsni o‘chira oladi
 		} else {
-			news = await newsModel.findOne({ _id: id, user: user_id }); // oddiy user faqat o‘zini
+			news = await newsModel.findOne({ _id: id, user: user_id }) // oddiy user faqat o‘zini
 		}
-	
-		if (!news) throw new HttpException(400, "Bu document topilmadi!");
-	
-		await news.deleteOne();
-	
+
+		if (!news) throw new HttpException(400, 'Bu document topilmadi!')
+
+		await news.deleteOne()
+
 		if (news.image) {
 			await SaveFileModel.updateOne(
 				{ file_path: news.image },
-				{ is_use: false, where_used: "", user: null }
-			);
+				{ is_use: false, where_used: '', user: null }
+			)
 		}
-	
+
 		// ✅ News egasining ID sini olib tashlash kerak
-		await UserModel.findByIdAndUpdate(news.user, { $pull: { news: id } });
-	
-		res.status(200).json({ success: true, msg: "Card deleted successfully" });
-	};
+		await UserModel.findByIdAndUpdate(news.user, { $pull: { news: id } })
+
+		res.status(200).json({ success: true, msg: 'Card deleted successfully' })
+	}
 
 	static update = async (req, res) => {
 		const { id } = req.params

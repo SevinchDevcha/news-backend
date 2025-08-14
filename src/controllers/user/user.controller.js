@@ -6,7 +6,7 @@ const { genSalt, compare, hash } = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const { RoleUser } = require('../../utils/constants.js')
 const { newsModel } = require('../../models/news/news.model.js')
-const { SaveFileModel } = require('../../models/save-file.js/save-file.model.js')
+const { SaveFileModel } = require('../../models/save-file/save-file.model.js')
 
 class UserController {
 	static signup_admin = async (req, res) => {
@@ -136,7 +136,7 @@ class UserController {
 	}
 
 	static deleteUser = async (req, res) => {
-		const { id } =req.params
+		const { id } = req.params
 		const { user_id } = req.user
 		const user = await UserModel.findById(id).populate('news')
 		if (!user) throw new HttpException(404, 'User not found')
@@ -166,7 +166,6 @@ class UserController {
 			msg: 'User and all related news deleted ✅',
 		})
 	}
-
 }
 
 module.exports = { UserController }
