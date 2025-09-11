@@ -13,7 +13,6 @@ jobs:
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
-          key: ${{ secrets.KEY }}
           port: 22
           script: |
             cd news-backend
