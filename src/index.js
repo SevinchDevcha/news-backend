@@ -18,7 +18,7 @@ app.use(cors({
 
 
 app.get("/",(req , res) => {
-	res.status(201).json({success:true , msg:"Assalomu aleykum hammaga , bu Sevinchning rasmiy sayti"})
+	res.status(201).json({success:true , msg:"Qonnaaye"})
 })
 
 main_router.forEach((value) => {
