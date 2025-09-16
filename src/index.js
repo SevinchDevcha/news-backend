@@ -20,7 +20,7 @@ app.use(cors({
 
 
 app.get("/",(req , res) => {
-	res.status(201).json({success:true , msg:"Qonnaaye"})
+	res.status(201).json({success:true , msg:"Nma gap"})
 })
 
 main_router.forEach((value) => {
