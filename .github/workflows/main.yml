@@ -16,7 +16,9 @@ jobs:
           key: ${{ secrets.KEY }}
           port: 22
           script: |
+            pm2 stop 0
             cd news-backend/
             git stash
-            git pull origin master
-            pm2 restart 0
+            git pull origin master --rebase
+            yarn
+            pm2 start 0
