@@ -13,11 +13,8 @@ app.use(express.text())
 
 
 app.use(cors({
-  origin: ["*" , "https://devcha.uz"],
-  methods: ['GET','POST','PUT','DELETE','OPTIONS'],
-  allowedHeaders: ['Content-Type','Authorization']
+  origin: ["http://localhost:5173" , "https://devcha.uz"]
 }));
-
 
 app.get("/",(req , res) => {
 	res.status(201).json({success:true , msg:"Nma gap"})
